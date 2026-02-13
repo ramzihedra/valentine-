@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Happy Valentine 💖</title>
+<style>
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(135deg,#1e1e2f,#2c003e);
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
+
+.container{
+padding:40px 20px;
+}
+
+h1{
+font-size:28px;
+}
+
+.typing{
+border-right:2px solid white;
+display:inline-block;
+white-space:pre-line;
+overflow:hidden;
+}
+
+img{
+width:260px;
+border-radius:20px;
+margin-top:20px;
+filter:blur(15px);
+transition:2s;
+box-shadow:0 0 30px rgba(255,105,180,0.6);
+}
+
+button{
+padding:10px 20px;
+margin:10px;
+border:none;
+border-radius:20px;
+background:#ff4da6;
+color:white;
+cursor:pointer;
+font-weight:bold;
+position:relative;
+}
+
+button:hover{
+background:#ff1a8c;
+}
+
+.hidden{
+display:none;
+}
+
+#loveMeterContainer{
+width:80%;
+background:#333;
+border-radius:20px;
+margin:20px auto;
+height:20px;
+}
+
+#loveMeter{
+width:0%;
+height:100%;
+background:linear-gradient(90deg,#ff4da6,#ff66cc);
+border-radius:20px;
+transition:1s;
+}
+
+.heart{
+position:fixed;
+top:-10px;
+color:pink;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+to{
+transform:translateY(100vh);
+opacity:0;
+}
+}
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8a6e3c8a6.mp3?filename=romantic-love-112199.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+
+<h1>Happy Valentine 💖</h1>
+
+<p id="text" class="typing"></p>
+
+<img id="photo" src="foto.jpeg">
+
+<div id="quizSection" class="hidden">
+<h2>Quiz Cinta 💕</h2>
+
+<p>1. Siapa yang paling ganteng?</p>
+<button onclick="correct()">Abang 💪</button>
+<button onclick="wrong(this)">Yang lain</button>
+
+<p>2. Siapa yang paling sayang adek?</p>
+<button onclick="correct()">Abang 💖</button>
+<button onclick="wrong(this)">Masih ragu</button>
+
+<p>3. Kita selamanya?</p>
+<button onclick="correct()">Iyaa dong 💍</button>
+<button onclick="wrong(this)">Hmm...</button>
+
+</div>
+
+<div id="loveMeterContainer" class="hidden">
+<div id="loveMeter"></div>
+</div>
+
+<div id="ending" class="hidden">
+<h2>I Love Youuu 💕</h2>
+</div>
+
+</div>
+
+<script>
+const message = `Haii adekkk,
+Abang cintaaa bangett samaa adee dann maaff belumm kasihh apaa apaa. duittt abangg abiss udahh wkwkwkk dari kemarin event gedee muluu kita, jadii abangg buatinn inii sendirii buatt adee tapi bantuan google sama ai jugaa sihh (walau tetep ribett hehe), tapii anw abangg sayangg bangett samaa adee yaa. mudah-mudahan dihari valentine inii adee bisa merasakan cintaaa darii abangg yaaa, i loveee youuu`;
+
+let i=0;
+function typing(){
+if(i<message.length){
+document.getElementById("text").innerHTML += message.charAt(i);
+i++;
+setTimeout(typing,40);
+}else{
+document.getElementById("photo").style.filter="blur(0)";
+document.getElementById("quizSection").classList.remove("hidden");
+}
+}
+typing();
+
+let love = 0;
+
+function correct(){
+love += 34;
+if(love>100) love=100;
+document.getElementById("loveMeterContainer").classList.remove("hidden");
+document.getElementById("loveMeter").style.width = love+"%";
+
+if(love>=100){
+document.getElementById("ending").classList.remove("hidden");
+startHearts();
+}
+}
+
+function wrong(btn){
+btn.style.position="absolute";
+btn.style.top=Math.random()*300+"px";
+btn.style.left=Math.random()*300+"px";
+}
+
+function startHearts(){
+for(let i=0;i<30;i++){
+let heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="💖";
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(Math.random()*3+2)+"s";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),5000);
+}
+}
+</script>
+
+</body>
+</html>
